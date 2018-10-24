@@ -1,0 +1,8 @@
+ca/mcgill/ecse321/eventregistration/model/Registration.class
+ca/mcgill/ecse321/eventregistration/controller/EventRegistrationController.class
+ca/mcgill/ecse321/eventregistration/model/Car.class
+ca/mcgill/ecse321/eventregistration/model/Participant.class
+ca/mcgill/ecse321/eventregistration/model/Event.class
+ca/mcgill/ecse321/eventregistration/model/RegistrationManager.class
+ca/mcgill/ecse321/eventregistration/repository/EventRegistrationRepository.class
+ca/mcgill/ecse321/eventregistration/EventregistrationApplication.class
