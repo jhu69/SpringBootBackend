@@ -19,7 +19,7 @@ public class EventRegistrationController {
 
 	@RequestMapping("/")
 	public String greeting() {
-		return "Hello world!";
+		return "Welcome to RideShareIncorporated";
 	}
 	
 	// Posting towards MySQL DB storing a type of car 
