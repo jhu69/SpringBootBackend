@@ -40,18 +40,34 @@ public class EventRegistrationController {
 	}
 	
 	//example request http://localhost:8080/event/teaparty/05 SEPTEMBER 2019/10:33:12/16:00:00/6/Mtl/Toronto
-	@PostMapping("/event/{name}/{eventDate}/{startTime}/{endTime}/{seats}/{startLocation}/{endLocation}")
+	@PostMapping("/event/{name}/{eventDate}/{startTime}/{endTime}/{startLocation}/{endLocation}/{carType}/{driveType}/{makeOfCar}/{meterPerStop}/{seats}")
 	public String createEvent(
 			@PathVariable("name") String name,
 			@PathVariable("eventDate") String eventDate,
 			@PathVariable("startTime") String startTime,
 			@PathVariable("endTime") String endTime,
-			@PathVariable("seats") Integer seats,
 			@PathVariable("startLocation") String startLocation,
-			@PathVariable("endLocation") String endLocation) 
+			@PathVariable("endLocation") String endLocation,
+			@PathVariable("carType") String carType,
+			@PathVariable("driveType") String driveType,
+			@PathVariable("makeOfCar") String makeOfCar,
+			@PathVariable("meterPerStop") Double meterPerStop,
+			@PathVariable("seats") Integer seats)
 	{
-		Event event = repository.createEvent(name,eventDate,startTime,endTime,seats,startLocation,endLocation);
-		return event.getName();
+		String eventInfo = "";
+		Event event = repository.createEvent(name,eventDate,startTime,endTime,startLocation,endLocation, carType, driveType, makeOfCar, meterPerStop, seats);
+		eventInfo += "Event name: " + event.getName() + "\n";
+		eventInfo += "Event date: " + event.getEventDate() + "\n";
+		eventInfo += "Start time: " + event.getStartTime() + "\n";
+		eventInfo += "End time: " + event.getEndTime() + "\n";
+		eventInfo += "Start location: " + event.getStartLocation() + "\n";
+		eventInfo += "End location: " + event.getEndLocation() + "\n";
+		eventInfo += "Car Type: " + event.getCarType() + "\n";
+ 		eventInfo += "Drive Type: " + event.getDriveType() + "\n";
+		eventInfo += "Car Make: " + event.getMakeOfCar() + "\n";
+ 		eventInfo += "Price/stop: " + event.getMeterPerStop() + "\n";
+		eventInfo += "Seats available: " + event.getSeats() + "\n";
+		return eventInfo;
 	}
 	
 	// Once car object has been posted in MySQL DB then to retrieve the object, do this 

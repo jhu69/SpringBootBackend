@@ -17,6 +17,7 @@ public class EventRegistrationRepository {
 	@Autowired
 	EntityManager entityManager;
 
+	// Participant objects to be stored in eventregi repo which will be mapped to a table in SQL through Hibernate 
 	@Transactional
 	public Participant createParticipant(String name,Integer isDriver) {
 		Participant participant = new Participant();
@@ -40,28 +41,36 @@ public class EventRegistrationRepository {
 		return car;
 	}
 	
-	
+	// Added seats, prices per stop, and car object
+	// Event objects to be stored in eventregi repo which will be mapped to a table in SQL through Hibernate
 	@Transactional
-	public Event createEvent(String name,String eventDate,String startTime,String endTime,Integer seats,String startLocation,String endLocation) {
-		Event event= new Event();
+	public Event createEvent(String name, String eventDate, String startTime, String endTime, String startLocation, String endLocation, String carType, String driveType, String makeOfCar, Double meterPerStop, Integer availableSeats) {
 		
+		Event event= new Event();
 		java.util.Date tmpDate = null;
 		try {
-			tmpDate = new SimpleDateFormat("dd MMM yyyy").parse(eventDate);//"01 NOVEMBER 2018"
+			//"01 NOVEMBER 2018"
+			tmpDate = new SimpleDateFormat("dd MMM yyyy").parse(eventDate);
 		} catch (ParseException e) {
 			e.printStackTrace();
 		}
-		java.sql.Date sqlDate = new java.sql.Date(tmpDate.getTime());
 		//"10:34:34"
+		java.sql.Date sqlDate = new java.sql.Date(tmpDate.getTime());
 		Time sqlStart = Time.valueOf(startTime);
 		Time sqlEnd = Time.valueOf(endTime);
 		event.setName(name);
 		event.setEventDate(sqlDate);
 		event.setStartTime(sqlStart);
 		event.setEndTime(sqlEnd);
-		event.setSeats(seats);
 		event.setStartLocation(startLocation);
 		event.setEndLocation(endLocation);
+		event.setCarType(carType);
+		event.setDriveType(driveType);
+		event.setMakeOfCar(makeOfCar);
+		event.setMeterPerStop(meterPerStop);
+		event.setSeats(availableSeats);
+		
+		
 		entityManager.persist(event);
 		return event;
 	}
