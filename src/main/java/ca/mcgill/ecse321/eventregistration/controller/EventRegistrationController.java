@@ -23,7 +23,6 @@ public class EventRegistrationController {
 	}
 	
 	// Posting towards MySQL DB storing a type of car 
-	// 
 	@PostMapping("/cars/{name}/{makeOfCar}/{numSeats}/{carType}/{numDoors}/{driveType}")
 	public String createCar(@PathVariable("name") String name,@PathVariable("makeOfCar") String makeOfCar,@PathVariable("numSeats") Integer numSeats,@PathVariable("carType") String carType,@PathVariable("numDoors") Integer numDoors,@PathVariable("driveType") String driveType) {
 		Car car = repository.createCar( name, makeOfCar, numSeats, carType, numDoors, driveType);
@@ -36,7 +35,10 @@ public class EventRegistrationController {
 	@PostMapping("/participants/{name}/{isDriver}")
 	public String createParticipant(@PathVariable("name") String name,@PathVariable("isDriver") Integer isDriver) {
 		Participant participant = repository.createParticipant(name,isDriver);
-		return participant.getName();
+		String participantInfo = "";
+		participantInfo += "Participant name: " + participant.getName() + "\n";
+		participantInfo += "Is Driver: " + participant.getIsDriver() + "\n";
+		return participantInfo;
 	}
 	
 	//example request http://localhost:8080/event/teaparty/05 SEPTEMBER 2019/10:33:12/16:00:00/6/Mtl/Toronto
@@ -51,7 +53,7 @@ public class EventRegistrationController {
 			@PathVariable("carType") String carType,
 			@PathVariable("driveType") String driveType,
 			@PathVariable("makeOfCar") String makeOfCar,
-			@PathVariable("meterPerStop") Double meterPerStop,
+			@PathVariable("meterPerStop") Integer meterPerStop,
 			@PathVariable("seats") Integer seats)
 	{
 		String eventInfo = "";
@@ -68,6 +70,42 @@ public class EventRegistrationController {
  		eventInfo += "Price/stop: " + event.getMeterPerStop() + "\n";
 		eventInfo += "Seats available: " + event.getSeats() + "\n";
 		return eventInfo;
+	}
+	
+	//example request http://localhost:8080/event/teaparty/05 SEPTEMBER 2019/10:33:12/16:00:00/6/Mtl/Toronto
+	@PostMapping("/eventchange/{name}/{eventDate}/{startTime}/{endTime}/{startLocation}/{endLocation}/{carType}/{driveType}/{makeOfCar}/{meterPerStop}/{seats}")
+	public String modifyEvent(
+			@PathVariable("name") String name,
+			@PathVariable("eventDate") String eventDate,
+			@PathVariable("startTime") String startTime,
+			@PathVariable("endTime") String endTime,
+			@PathVariable("startLocation") String startLocation,
+			@PathVariable("endLocation") String endLocation,
+			@PathVariable("carType") String carType,
+			@PathVariable("driveType") String driveType,
+			@PathVariable("makeOfCar") String makeOfCar,
+			@PathVariable("meterPerStop") Integer meterPerStop,
+			@PathVariable("seats") Integer seats) {
+		Event modifiedEvent = repository.modifyEvent(name, eventDate, startTime, endTime, startLocation, endLocation, carType, driveType, makeOfCar, meterPerStop, seats);
+		String eventInfo = "";
+		eventInfo += "Event name: " + modifiedEvent.getName() + "\n";
+		eventInfo += "Event date: " + modifiedEvent.getEventDate() + "\n";
+		eventInfo += "Start time: " + modifiedEvent.getStartTime() + "\n";
+		eventInfo += "End time: " + modifiedEvent.getEndTime() + "\n";
+		eventInfo += "Start location: " + modifiedEvent.getStartLocation() + "\n";
+		eventInfo += "End location: " + modifiedEvent.getEndLocation() + "\n";
+		eventInfo += "Car Type: " + modifiedEvent.getCarType() + "\n";
+ 		eventInfo += "Drive Type: " + modifiedEvent.getDriveType() + "\n";
+		eventInfo += "Car Make: " + modifiedEvent.getMakeOfCar() + "\n";
+ 		eventInfo += "Price/stop: " + modifiedEvent.getMeterPerStop() + "\n";
+		eventInfo += "Seats available: " + modifiedEvent.getSeats() + "\n";
+		return eventInfo;
+	}
+	
+	// Driver feature, deletes desired existing events 
+	@PostMapping("/eventremove/{name}")
+	public void deleteEvent(String name) {
+		repository.deleteEvent(name);
 	}
 	
 	// Once car object has been posted in MySQL DB then to retrieve the object, do this 

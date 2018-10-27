@@ -1,4 +1,5 @@
 package ca.mcgill.ecse321.eventregistration.model;
+
 import javax.persistence.ManyToMany;
 import java.util.Set;
 
@@ -7,37 +8,47 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 
 @Entity
-public class Participant{
-private Set<Car> car;
+public class Participant {
 
-@ManyToMany
-public Set<Car> getCar() {
-   return this.car;
-}
+	private String name;
+	private Integer isDriver;
+	private Set<Car> car;
+	private Integer id;
 
-public void setCar(Set<Car> cars) {
-   this.car = cars;
-}
-
-
-private String name;
-private Integer isDriver;
-   
-   public void setName(String value) {
-	   this.name = value;
-    }
-   public void setIsDriver(Integer value) {
-	   this.isDriver = value;
+	@ManyToMany
+	public Set<Car> getCar() {
+		return this.car;
 	}
 
-@Id
-@Column(name="ParticipantId")
-public String getName() {
-return this.name;
-       }
+	public void setCar(Set<Car> cars) {
+		this.car = cars;
+	}
 
-@Column(name="IsDriver")
-public Integer getIsDriver() {
-return this.isDriver;
-       }
-   }
+	public void setName(String value) {
+		this.name = value;
+	}
+
+	public void setIsDriver(Integer value) {
+		this.isDriver = value;
+	}
+
+	@Id
+	@Column(name = "ParticipantName")
+	public String getName() {
+		return this.name;
+	}
+
+	@Column(name = "IsDriver")
+	public Integer getIsDriver() {
+		return this.isDriver;
+	}
+
+	@Column(name = "id")
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
+}

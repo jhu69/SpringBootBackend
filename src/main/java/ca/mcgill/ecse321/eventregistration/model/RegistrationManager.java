@@ -8,61 +8,61 @@ import javax.persistence.Column;
 import javax.persistence.OneToMany;
 
 @Entity
-public class RegistrationManager{
-private Set<Car> car;
+public class RegistrationManager {
+	private Set<Car> car;
 
-@OneToMany(cascade={CascadeType.ALL})
-public Set<Car> getCar() {
-   return this.car;
-}
+	@OneToMany(cascade = { CascadeType.ALL })
+	public Set<Car> getCar() {
+		return this.car;
+	}
 
-public void setCar(Set<Car> cars) {
-   this.car = cars;
-}
+	public void setCar(Set<Car> cars) {
+		this.car = cars;
+	}
 
-	
 	private Integer id;
+
 	public void setId(Integer value) {
 		this.id = value;
 	}
-	
+
 	@Id
-	@Column(name="id")
-  public Integer getId() {
+	@Column(name = "id")
+	public Integer getId() {
 		return this.id;
 	}
-	
-private Set<Participant> participants;
 
-@OneToMany(cascade={CascadeType.ALL})
-public Set<Participant> getParticipants() {
-   return this.participants;
-}
+	private Set<Participant> participants;
 
-public void setParticipants(Set<Participant> participantss) {
-   this.participants = participantss;
-}
+	@OneToMany(cascade = { CascadeType.ALL })
+	public Set<Participant> getParticipants() {
+		return this.participants;
+	}
 
-private Set<Registration> registration;
+	public void setParticipants(Set<Participant> participantss) {
+		this.participants = participantss;
+	}
 
-@OneToMany(cascade={CascadeType.ALL})
-public Set<Registration> getRegistration() {
-   return this.registration;
-}
+	private Set<Registration> registration;
 
-public void setRegistration(Set<Registration> registrations) {
-   this.registration = registrations;
-}
+	@OneToMany(cascade = { CascadeType.ALL })
+	public Set<Registration> getRegistration() {
+		return this.registration;
+	}
 
-private Set<Event> event;
+	public void setRegistration(Set<Registration> registrations) {
+		this.registration = registrations;
+	}
 
-@OneToMany(cascade={CascadeType.ALL})
-public Set<Event> getEvent() {
-   return this.event;
-}
+	private Set<Event> event;
 
-public void setEvent(Set<Event> events) {
-   this.event = events;
-}
+	@OneToMany(cascade = { CascadeType.ALL })
+	public Set<Event> getEvent() {
+		return this.event;
+	}
+
+	public void setEvent(Set<Event> events) {
+		this.event = events;
+	}
 
 }

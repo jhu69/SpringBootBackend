@@ -10,7 +10,6 @@ import javax.persistence.Id;
 public class Event {
 
 	// Event field attributes 
-	private String name;
 	private Date eventDate;
 	private Time startTime;
 	private Time endTime;
@@ -20,8 +19,9 @@ public class Event {
 	private String carType;
 	private String driveType;
 	private String makeOfCar;
-	private Double meterPerStop; 
+	private Integer meterPerStop; 
 	private Integer seats;
+	private String name;
 
 	// Getters and Setters for the attributes 
 	public void setName(String value) {
@@ -29,7 +29,7 @@ public class Event {
 	}
 
 	// Acts like a primary key in my SQL table to distinguish between two different events
-	@Id 
+	@Id
 	@Column(name = "EventName")
 	public String getName() {
 		return this.name;
@@ -116,12 +116,12 @@ public class Event {
 		return this.seats;
 	}
 
-	@Column(name="CostPerStop")
-	public Double getMeterPerStop() {
+	@Column(name= "CostPerStop")
+	public Integer getMeterPerStop() {
 		return meterPerStop;
 	}
 
-	public void setMeterPerStop(Double meterPerStop) {
+	public void setMeterPerStop(Integer meterPerStop) {
 		this.meterPerStop = meterPerStop;
 	}
 }
