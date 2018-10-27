@@ -21,6 +21,7 @@ public class Event {
 	private String makeOfCar;
 	private Integer meterPerStop; 
 	private Integer seats;
+	@Id
 	private String name;
 
 	// Getters and Setters for the attributes 

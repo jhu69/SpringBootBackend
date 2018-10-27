@@ -2,23 +2,13 @@ package ca.mcgill.ecse321.eventregistration.model;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+
 import java.util.Set;
 import javax.persistence.CascadeType;
-import javax.persistence.Column;
 import javax.persistence.OneToMany;
 
 @Entity
 public class RegistrationManager {
-	private Set<Car> car;
-
-	@OneToMany(cascade = { CascadeType.ALL })
-	public Set<Car> getCar() {
-		return this.car;
-	}
-
-	public void setCar(Set<Car> cars) {
-		this.car = cars;
-	}
 
 	private Integer id;
 
@@ -27,7 +17,6 @@ public class RegistrationManager {
 	}
 
 	@Id
-	@Column(name = "id")
 	public Integer getId() {
 		return this.id;
 	}
@@ -39,6 +28,8 @@ public class RegistrationManager {
 		return this.participants;
 	}
 
+	// each new participant needs to be added to the participants set using
+	// setParticipants(getParticipants().add(ourNewParticipant)
 	public void setParticipants(Set<Participant> participantss) {
 		this.participants = participantss;
 	}
@@ -50,6 +41,7 @@ public class RegistrationManager {
 		return this.registration;
 	}
 
+	// each new registration needs to be added to the registration set
 	public void setRegistration(Set<Registration> registrations) {
 		this.registration = registrations;
 	}
@@ -61,6 +53,7 @@ public class RegistrationManager {
 		return this.event;
 	}
 
+	// each event needs to be added to the event sets
 	public void setEvent(Set<Event> events) {
 		this.event = events;
 	}

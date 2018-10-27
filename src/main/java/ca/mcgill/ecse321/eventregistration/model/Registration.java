@@ -1,26 +1,14 @@
 package ca.mcgill.ecse321.eventregistration.model;
 
-import javax.persistence.ManyToMany;
-import java.util.Set;
-
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
+//this class links one participant to one event
+//for multiple participant regitering to one event we need multiple registartions linking the same event to the different participants
 @Entity
 public class Registration {
-	private Set<Car> car;
-
-	@ManyToMany
-	public Set<Car> getCar() {
-		return this.car;
-	}
-
-	public void setCar(Set<Car> cars) {
-		this.car = cars;
-	}
-
+	
 	private Participant participants;
 
 	@ManyToOne(optional = false)
@@ -50,7 +38,6 @@ public class Registration {
 	}
 
 	@Id
-	@Column(name = "RegistrationId")
 	public Integer getId() {
 		return this.id;
 	}
